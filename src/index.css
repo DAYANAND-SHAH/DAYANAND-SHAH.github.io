@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  @apply bg-ink text-slate-300 font-body antialiased;
+  /* Faint grain so large dark areas don't band */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+}
+
+/* Accessible focus ring on all interactive elements */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@layer components {
+  /* Gradient headline text */
+  .text-glow-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-cyan-400 to-violet-400;
+  }
+
+  /* Frosted panel used for cards */
+  .glass-panel {
+    @apply bg-panel/60 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+
+  /* Small pill tag for tech-stack chips */
+  .chip {
+    @apply inline-block rounded-full border border-cyan-400/20 bg-cyan-400/5
+      px-3 py-1 text-xs font-medium text-cyan-200/90;
+  }
+}
+
+/* Blinking caret for the hero type-writer */
+.typing-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.1em;
+  background: #22d3ee;
+  animation: caret-blink 1s step-end infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-caret { animation: none; }
+}
